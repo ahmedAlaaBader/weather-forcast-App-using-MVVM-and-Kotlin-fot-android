@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:gravity="center_vertical"
+    android:layout_marginBottom="8dp"
+    android:background="@color/accent_purple">
+
+    <!-- Weather Icon -->
+    <ImageView
+        android:id="@+id/forecast_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/baseline_shield_moon_24"
+        android:contentDescription="@string/weather_icon" /> <!-- Add contentDescription for accessibility -->
+
+    <!-- Weather Condition -->
+    <TextView
+        android:id="@+id/forecast_condition"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Clear"
+        android:textColor="@color/text_primary"
+        android:textSize="14sp"
+        android:layout_marginStart="8dp" /> <!-- Add margin for spacing -->
+
+    <!-- Temperature -->
+    <TextView
+        android:id="@+id/forecast_temperature"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="20°C"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginStart="8dp" /> <!-- Add margin for spacing -->
+
+    <!-- Time -->
+    <TextView
+        android:id="@+id/forecast_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="14:00"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        android:layout_marginStart="8dp" /> <!-- Add margin for spacing -->
+</LinearLayout>

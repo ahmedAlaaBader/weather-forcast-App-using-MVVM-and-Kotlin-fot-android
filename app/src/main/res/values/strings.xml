@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">wetherForcastApp</string>
+    <string name="fav">favorite</string>
+    <string name="alarm">Alarm</string>
+    <string name="text_name">Weather</string>
+    <string name="weather_icon">moon</string>
+</resources>

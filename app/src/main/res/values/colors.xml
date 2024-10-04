@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="text_primary">#FFFFFF</color>
+    <color name="accent_color">#FF4EC3</color>
+    <color name="secondary_text">#808080</color>
+    <!-- Primary colors for dark theme -->
+    <color name="background_dark">#1C1C1C</color> <!-- Main background color -->
+    <color name="card_background_dark">#2C2C2C</color> <!-- Background for CardView elements -->
+    <color name="accent_purple">#9C27B0</color> <!-- Accent color for selected items -->
+    <color name="highlight_yellow">#FFD700</color> <!-- Highlight for icons like sun/cloud -->
+    <color name="divider_grey">#4D4D4D</color> <!-- Divider line color -->
+
+    <!-- Text colors -->
+
+    <color name="text_secondary">#B3B3B3</color> <!-- Secondary text color (light grey) -->
+
+    <!-- Weather icon colors -->
+    <color name="icon_sun_yellow">#FFD700</color> <!-- Yellow for sunny weather icons -->
+    <color name="icon_cloud_grey">#A9A9A9</color> <!-- Grey for cloudy weather icons -->
+    <color name="icon_rain_blue">#6495ED</color> <!-- Light blue for rainy weather icons -->
+
+    <!-- Transparent overlay for selected state -->
+    <color name="selected_overlay">#8027B0</color>
+
+</resources>
