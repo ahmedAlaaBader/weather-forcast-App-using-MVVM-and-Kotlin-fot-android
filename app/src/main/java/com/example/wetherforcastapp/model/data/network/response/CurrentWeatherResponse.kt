@@ -1,11 +1,11 @@
 package com.example.wetherforcastapp.model.data.network.response
 
-import com.example.wetherforcastapp.model.data.database.currentweather.intyty.Clouds
-import com.example.wetherforcastapp.model.data.database.currentweather.intyty.Coord
-import com.example.wetherforcastapp.model.data.database.currentweather.intyty.Main
-import com.example.wetherforcastapp.model.data.database.currentweather.intyty.Sys
-import com.example.wetherforcastapp.model.data.database.currentweather.intyty.Weather
-import com.example.wetherforcastapp.model.data.database.currentweather.intyty.Wind
+import com.example.wetherforcastapp.model.data.database.currentweather.pojos.Clouds
+import com.example.wetherforcastapp.model.data.database.currentweather.pojos.Coord
+import com.example.wetherforcastapp.model.data.database.currentweather.pojos.Main
+import com.example.wetherforcastapp.model.data.database.currentweather.pojos.Sys
+import com.example.wetherforcastapp.model.data.database.currentweather.pojos.Weather
+import com.example.wetherforcastapp.model.data.database.currentweather.pojos.Wind
 
 data class CurrentWeatherResponse(
     val base: String,
