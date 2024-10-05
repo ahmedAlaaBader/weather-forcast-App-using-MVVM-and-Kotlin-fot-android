@@ -8,7 +8,7 @@ import com.example.wetherforcastapp.model.data.database.currentweather.intyty.Da
 // Sealed class to represent the various states of the UI
 sealed class UIState {
     // Represents a successful state with the retrieved data
-    class Success(val dataBaseEntity: DataBaseEntity) : UIState()
+    class Success<T> (val data :T): UIState()
 
     // Represents a failure state with an error message
     class Failure(val msg: Throwable) : UIState()

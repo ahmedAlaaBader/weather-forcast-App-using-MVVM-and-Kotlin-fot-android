@@ -87,9 +87,10 @@ class HomeFragment : Fragment(),LocationResultListener {
                         showLoadingState()
 
                     }
-                    is UIState.Success -> {
+                    is UIState.Success<*> -> {
+                        val dataBaseEntity = state.data as DataBaseEntity
                         Log.d("HomeFragment", "Current weather data received")
-                        updateCurrentWeatherUI(state.dataBaseEntity)
+                        updateCurrentWeatherUI(dataBaseEntity)
                     }
                     is UIState.Failure -> {
                         Log.e("HomeFragment", "Error: ${state.msg}")

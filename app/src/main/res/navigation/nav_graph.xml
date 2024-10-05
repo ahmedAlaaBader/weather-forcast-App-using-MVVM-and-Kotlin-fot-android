@@ -14,7 +14,11 @@
         android:id="@+id/favFragment"
         android:name="com.example.wetherforcastapp.ui.favorite.view.favFragment"
         android:label="fragment_fav"
-        tools:layout="@layout/fragment_fav" />
+        tools:layout="@layout/fragment_fav" >
+        <action
+            android:id="@+id/action_favFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/alarmFragment"
         android:name="com.example.wetherforcastapp.ui.alarm.view.alarmFragment"
@@ -25,4 +29,9 @@
         android:name="com.example.wetherforcastapp.ui.sitting.view.SittingFragment"
         android:label="fragment_sitting"
         tools:layout="@layout/fragment_sitting" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.wetherforcastapp.ui.favorite.view.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" />
 </navigation>

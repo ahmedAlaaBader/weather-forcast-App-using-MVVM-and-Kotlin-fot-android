@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface IWeatherDao {
 
-    @Query("SELECT * FROM TWeather ")
-     fun getAllFav(): Flow<List<DataBaseEntity>>
+    @Query("SELECT * FROM TWeather WHERE address != :current ")
+     fun getAllFav(current: String = "current"): Flow<List<DataBaseEntity>>
     @Query("SELECT * FROM TWeather WHERE address = :current ")
     fun getCurrent(current: String = "current"): Flow<DataBaseEntity>
     @Query("DELETE FROM TWeather WHERE address = :address")
