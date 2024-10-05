@@ -1,6 +1,5 @@
-package com.example.wetherforcastapp.model.data
+package com.example.wetherforcastapp.model.data.network
 
-import com.example.wetherforcastapp.model.data.database.currentweather.intyty.DataBaseEntity
 import com.example.wetherforcastapp.model.data.network.response.CurrentWeatherResponse
 import com.example.wetherforcastapp.model.data.network.forcastresponse.ForecastResponse
 import okhttp3.Interceptor

@@ -18,7 +18,9 @@ class HomeViewModel(private val repo: IRepo) : ViewModel() {
 
     private val _uiState = MutableStateFlow<UIState>(UIState.Loading)
     val uiState: StateFlow<UIState> = _uiState
-
+init {
+    fetchCurrentWeatherLocal()
+}
     // Fetch weather from API and save to local database
     fun fetchWeatherAndSaveToLocal(latitude: Double, longitude: Double) {
         viewModelScope.launch {

@@ -1,11 +1,13 @@
 package com.example.wetherforcastapp.ui.home.view
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -20,17 +22,19 @@ import com.example.wetherforcastapp.model.data.UIState
 import com.example.wetherforcastapp.model.data.database.LocalDataBaseImp
 import com.example.wetherforcastapp.model.data.database.currentweather.intyty.DataBaseEntity
 import com.example.wetherforcastapp.model.data.network.IRemoteDataSourceImpl
+import com.example.wetherforcastapp.ui.helperClasess.LocationPermissions
+import com.example.wetherforcastapp.ui.helperClasess.LocationResultListener
 import com.example.wetherforcastapp.ui.home.viewmodel.HomeViewModelFactory
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(),LocationResultListener {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var hourlyWeatherListAdapter: HourlyWeatherListAdapter
     private lateinit var daysWeatherListAdapter: DaysWeatherListAdapter
-
+    private lateinit var locationPermissions: LocationPermissions
     private val viewModel: HomeViewModel by viewModels {
         HomeViewModelFactory(
             RepoImpl.getInstance(
@@ -47,7 +51,7 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         setupRecyclerViews()
-
+         locationPermissions = LocationPermissions(this,this)
 
 
         return binding.root
@@ -56,7 +60,8 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         // Fetch weather data (current and forecast)
-        fetchWeatherData(30.2681475, 30.60733385) // Example coordinates
+       // fetchWeatherData(30.2681475, 30.60733385) // Example coordinates
+        locationPermissions.checkLocationPermissions()
         observeUIState()
     }
 
@@ -99,9 +104,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun fetchWeatherData(latitude: Double, longitude: Double) {
-        viewModel.fetchWeatherAndSaveToLocal(latitude, longitude)
-    }
+
 
     private fun updateCurrentWeatherUI(dataBaseEntity: DataBaseEntity) {
         binding.progressBar.visibility = View.GONE
@@ -140,4 +143,37 @@ class HomeFragment : Fragment() {
         // Handle error (show a Toast, Snackbar, or TextView with the error message)
         Toast.makeText(requireContext(), "Error: ${exception.localizedMessage}", Toast.LENGTH_LONG).show()
     }
+
+    override fun onLocationReceived(latitude: Double, longitude: Double) {
+        viewModel.fetchWeatherAndSaveToLocal(latitude, longitude)
+    }
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == locationPermissions.REQUEST_LOCATION_CODE) {
+            if (grantResults.isNotEmpty()) {
+                if (grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
+                    // If granted, check if location services are enabled
+                    if (locationPermissions.isLocationEnabled()) {
+                        locationPermissions.getFreshLocation()
+                    } else {
+                        locationPermissions.promptEnableLocation()
+                    }
+                } else {
+                    // Permission denied (temporary)
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION)) {
+                        Toast.makeText(requireActivity(), "Location permission is required for this app to function.", Toast.LENGTH_SHORT).show()
+                    } else {
+                        // User has denied permission with "Don't ask again"
+                        Toast.makeText(requireActivity(), "Location permission was denied. Please enable it in app settings.", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
+    }
+
 }
