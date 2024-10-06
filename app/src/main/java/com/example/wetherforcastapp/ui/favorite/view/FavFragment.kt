@@ -63,6 +63,8 @@ class favFragment : Fragment() {
         binding.fab.setOnClickListener{
             findNavController().navigate(R.id.action_favFragment_to_mapsFragment)
         }
+
+
     }
     private fun observeUIState() {
         lifecycleScope.launch {
@@ -108,7 +110,7 @@ class favFragment : Fragment() {
     }
 
     private fun showError(exception: Throwable) {
-        // Handle error (show a Toast, Snackbar, or TextView with the error message)
+
         Toast.makeText(requireContext(), "Error: ${exception.localizedMessage}", Toast.LENGTH_LONG).show()
     }
     private fun setupRecyclerViews() {
@@ -124,7 +126,7 @@ class favFragment : Fragment() {
         val bundle = Bundle().apply {
             putSerializable("dataBaseEntity", dataBaseEntity)
         }
-       // findNavController().navigate(R.id.action_nav_slideshow_to_favFragment, bundle)
+        findNavController().navigate(R.id.action_favFragment_to_favDetailsFragment,bundle)
     }
 
     private fun deleteFromFav(favWeather: String) {

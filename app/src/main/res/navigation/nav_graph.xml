@@ -8,30 +8,38 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.wetherforcastapp.ui.home.view.HomeFragment"
-        android:label="fragment_home"
+        android:label="Home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/favFragment"
         android:name="com.example.wetherforcastapp.ui.favorite.view.favFragment"
-        android:label="fragment_fav"
+        android:label="Favorite"
         tools:layout="@layout/fragment_fav" >
         <action
             android:id="@+id/action_favFragment_to_mapsFragment"
             app:destination="@id/mapsFragment" />
+        <action
+            android:id="@+id/action_favFragment_to_favDetailsFragment"
+            app:destination="@id/favDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/alarmFragment"
         android:name="com.example.wetherforcastapp.ui.alarm.view.alarmFragment"
-        android:label="fragment_alarm"
+        android:label="Alarms"
         tools:layout="@layout/fragment_alarm" />
     <fragment
         android:id="@+id/sittingFragment"
         android:name="com.example.wetherforcastapp.ui.sitting.view.SittingFragment"
-        android:label="fragment_sitting"
+        android:label="Sitting"
         tools:layout="@layout/fragment_sitting" />
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.example.wetherforcastapp.ui.favorite.view.MapsFragment"
-        android:label="fragment_maps"
+        android:label="Maps"
         tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/favDetailsFragment"
+        android:name="com.example.wetherforcastapp.ui.favorite.view.FavDetailsFragment"
+        android:label="Favorite Weather"
+        tools:layout="@layout/fragment_fav_details" />
 </navigation>

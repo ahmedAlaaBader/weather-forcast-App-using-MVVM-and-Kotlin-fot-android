@@ -72,7 +72,7 @@ init {
 
                     // Save to local database
                     repo.upsertWeather(dataBaseEntity)
-                    fetchCurrentWeatherLocal()
+                   // fetchCurrentWeatherLocal()
 
                 }
                 .catch { exception ->
