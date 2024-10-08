@@ -22,7 +22,7 @@ class IRemoteDataSourceImpl (private val apiWeatherService: ApiWeatherService): 
         units: String,
         lang: String
     ): Flow<CurrentWeatherResponse> = flow {
-        emit(apiWeatherService.getCurrentWeather(latitude,longitude))
+        emit(apiWeatherService.getCurrentWeather(latitude,longitude,lang=lang))
     }
 
     override fun getForecastWeather(
@@ -31,7 +31,7 @@ class IRemoteDataSourceImpl (private val apiWeatherService: ApiWeatherService): 
         units: String,
         lang: String
     ): Flow<ForecastResponse> = flow {
-        emit(apiWeatherService.getForecastWeather(latitude,longitude))
+        emit(apiWeatherService.getForecastWeather(latitude,longitude,lang=lang))
     }
 
 

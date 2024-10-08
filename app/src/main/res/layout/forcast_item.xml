@@ -18,7 +18,7 @@
             android:id="@+id/day"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Sunday"
+            android:text="@string/sunday"
             android:textSize="16sp"
             android:textColor="@color/text_primary"
             android:layout_weight="1"/>
@@ -27,7 +27,7 @@
             android:id="@+id/weather_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Clear sky"
+            android:text="@string/clear_sky"
             android:textColor="@color/secondary_text"/>
 
         <ImageView
@@ -41,7 +41,7 @@
             android:id="@+id/weekly_temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="22/12°C"
+            android:text="@string/_22_12_c"
             android:textColor="@color/text_primary"
             android:layout_marginStart="16dp"/>
     </LinearLayout>

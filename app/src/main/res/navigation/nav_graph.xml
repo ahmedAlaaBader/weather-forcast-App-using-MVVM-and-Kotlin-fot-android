@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/favFragment"
-        android:name="com.example.wetherforcastapp.ui.favorite.view.favFragment"
+        android:name="com.example.wetherforcastapp.ui.favorite.view.FavFragment"
         android:label="Favorite"
         tools:layout="@layout/fragment_fav" >
         <action

@@ -11,11 +11,11 @@ interface IRemoteDataSource {
     fun getCurrentWeather( latitude: Double,
                            longitude: Double,
                            units: String = "metric",
-                           lang: String = "en"): Flow<CurrentWeatherResponse>
+                           lang: String ): Flow<CurrentWeatherResponse>
     fun getForecastWeather( latitude: Double,
                             longitude: Double,
                             units: String = "metric",
-                           lang: String = "en"):Flow<ForecastResponse>
+                           lang: String ):Flow<ForecastResponse>
 
 
 

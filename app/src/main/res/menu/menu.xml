@@ -5,7 +5,7 @@
         <item
             android:id="@+id/homeFragment"
             android:icon="@drawable/home_24dp_5985e1_fill0_wght400_grad0_opsz24"
-            android:title="Home" />
+            android:title="@string/home" />
         <item
             android:id="@+id/favFragment"
             android:icon="@drawable/baseline_favorite_24"
@@ -17,6 +17,6 @@
         <item
             android:id="@+id/sittingFragment"
             android:icon="@drawable/settings_24dp_5985e1_fill0_wght400_grad0_opsz24"
-            android:title="Settings" />
+            android:title="@string/settings" />
     </group>
 </menu>

@@ -7,8 +7,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface IRepo {
     // Remote data methods
-    fun getCurrentWeatherRemote(latitude: Double, longitude: Double, units: String = "metric", lang: String = "en"): Flow<CurrentWeatherResponse>
-    fun getForecastWeatherRemote(latitude: Double, longitude: Double, units: String = "metric", lang: String = "en"): Flow<ForecastResponse>
+    fun getCurrentWeatherRemote(latitude: Double, longitude: Double, units: String = "metric", lang: String ): Flow<CurrentWeatherResponse>
+    fun getForecastWeatherRemote(latitude: Double, longitude: Double, units: String = "metric", lang: String ): Flow<ForecastResponse>
 
     // Local data methods
     fun getCurrentWeatherLocal(): Flow<DataBaseEntity>

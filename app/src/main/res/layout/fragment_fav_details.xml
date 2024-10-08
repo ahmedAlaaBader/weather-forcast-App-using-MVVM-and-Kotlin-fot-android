@@ -118,7 +118,7 @@
                         android:id="@+id/pressure_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pressure"
+                        android:text="@string/pressure"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp" />
 
@@ -144,7 +144,7 @@
                         android:id="@+id/humidity_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Humidity"
+                        android:text="@string/humidity"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp" />
 
@@ -170,7 +170,7 @@
                         android:id="@+id/wind_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Wind"
+                        android:text="@string/wind"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp" />
 
@@ -204,7 +204,7 @@
                         android:id="@+id/visibility_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Visibility"
+                        android:text="@string/visibility"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp" />
 
@@ -230,7 +230,7 @@
                         android:id="@+id/cloud_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cloud"
+                        android:text="@string/cloud"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp" />
 
@@ -256,7 +256,7 @@
                         android:id="@+id/uv_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ultraviolet"
+                        android:text="@string/ultraviolet"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp" />
 

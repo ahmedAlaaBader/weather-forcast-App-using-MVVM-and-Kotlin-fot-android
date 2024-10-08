@@ -1,13 +1,235 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.sitting.view.SittingFragment">
+    tools:context=".ui.sitting.view.SittingFragment"
+    android:background="#000000"
+    android:padding="16dp"
+    android:layoutDirection="locale">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="sitting" />
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-</FrameLayout>
+            <!-- First LinearLayout (Location, Language, Temperature) -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:layout_gravity="start">
+
+                <!-- Location -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Location"
+                    android:textColor="#FFFFFF"
+                    android:background="@color/accent_purple"
+                    android:padding="8dp"
+                    android:layout_gravity="center"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="8dp"/>
+
+                <RadioGroup
+                    android:id="@+id/location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/accent_purple"
+                    android:padding="8dp">
+
+                    <RadioButton
+                        android:id="@+id/gps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gps"
+                        android:textColor="#FFFFFF"
+                        android:buttonTint="@color/accent_purple"/>
+                    <RadioButton
+                        android:id="@+id/map"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/map"
+                        android:textColor="#FFFFFF"
+                        android:buttonTint="@color/accent_purple"/>
+                </RadioGroup>
+
+                <!-- Language -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/language"
+                    android:textColor="#FFFFFF"
+                    android:background="@color/accent_purple"
+                    android:padding="8dp"
+                    android:layout_gravity="center"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="8dp"/>
+
+                <RadioGroup
+                    android:id="@+id/radioGroupLanguage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/accent_purple"
+                    android:padding="8dp">
+
+                    <RadioButton
+                        android:id="@+id/radioEnglish"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/english"
+                        android:textColor="#FFFFFF"
+                        android:buttonTint="@color/accent_purple"/>
+                    <RadioButton
+                        android:id="@+id/radioArabic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/arabic"
+                        android:textColor="#FFFFFF"
+                        android:buttonTint="@color/accent_purple"/>
+                </RadioGroup>
+
+                <!-- Temperature -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/temperature"
+                    android:textColor="#FFFFFF"
+                    android:background="@color/accent_purple"
+                    android:padding="8dp"
+                    android:layout_gravity="center"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="8dp"/>
+
+                <RadioGroup
+                    android:id="@+id/temperature"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/accent_purple"
+                    android:padding="8dp">
+
+                    <RadioButton
+                        android:id="@+id/celsius"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/celsius"
+                        android:textColor="#FFFFFF"
+                        android:buttonTint="@color/accent_purple"/>
+                    <RadioButton
+                        android:id="@+id/kelvin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/kelvin"
+                        android:textColor="#FFFFFF"
+                        android:buttonTint="@color/accent_purple"/>
+                    <RadioButton
+                        android:id="@+id/fahrenheit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fahrenheit"
+                        android:textColor="#FFFFFF"
+                        android:buttonTint="@color/accent_purple"/>
+                </RadioGroup>
+            </LinearLayout>
+
+            <!-- Second LinearLayout (Wind Speed, Notifications) -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:layout_gravity="end">
+
+                <!-- Wind Speed -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wind_speed"
+                    android:textColor="#FFFFFF"
+                    android:background="@color/accent_purple"
+                    android:padding="8dp"
+                    android:layout_gravity="center"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="8dp"/>
+
+                <RadioGroup
+                    android:id="@+id/windSpeed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/accent_purple"
+                    android:padding="8dp">
+
+                    <RadioButton
+                        android:id="@+id/meter_Sec"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/meter_sec"
+                        android:textColor="#FFFFFF"
+                        android:buttonTint="@color/accent_purple"/>
+                    <RadioButton
+                        android:id="@+id/mile_Hour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mile_hour"
+                        android:textColor="#FFFFFF"
+                        android:buttonTint="@color/accent_purple"/>
+                </RadioGroup>
+
+                <!-- Notifications -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/notifications"
+                    android:textColor="#FFFFFF"
+                    android:background="@color/accent_purple"
+                    android:padding="8dp"
+                    android:layout_gravity="center"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="8dp"/>
+
+                <RadioGroup
+                    android:id="@+id/notifications"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/accent_purple"
+                    android:padding="8dp">
+
+                    <RadioButton
+                        android:id="@+id/enable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/enable"
+                        android:textColor="#FFFFFF"
+                        android:buttonTint="@color/accent_purple"/>
+                    <RadioButton
+                        android:id="@+id/disable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/disable"
+                        android:textColor="#FFFFFF"
+                        android:buttonTint="@color/accent_purple"/>
+                </RadioGroup>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

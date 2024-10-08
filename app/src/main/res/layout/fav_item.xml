@@ -20,7 +20,7 @@
         android:id="@+id/locationName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Møre og Romsdal"
+        android:text="@string/m_re_og_romsdal"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         android:layout_weight="1"

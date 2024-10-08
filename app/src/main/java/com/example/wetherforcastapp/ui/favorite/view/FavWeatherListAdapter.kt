@@ -23,7 +23,10 @@ class FavWeatherListAdapter (
 
     override fun onBindViewHolder(holder: FavViewHolder, position: Int) {
         val favWeather = getItem(position)
-        holder.binding.locationName.text = favWeather.address
+        if (favWeather.currentWeatherResponses.name != ""){
+        holder.binding.locationName.text = favWeather.currentWeatherResponses.name}else{
+            holder.binding.locationName.text = favWeather.address
+        }
         holder.binding.favLinearLayout.setOnClickListener {
             myListener.invoke(favWeather)
         }

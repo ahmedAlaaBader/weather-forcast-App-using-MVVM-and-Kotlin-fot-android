@@ -17,7 +17,7 @@ interface ApiWeatherService {
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
         @Query("units") units: String = "metric",
-        @Query("lang") lang: String = "en"
+        @Query("lang") lang: String
     ): CurrentWeatherResponse
 
     @GET("forecast")
@@ -25,7 +25,7 @@ interface ApiWeatherService {
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
         @Query("units") units: String = "metric",
-        @Query("lang") lang: String = "en"
+        @Query("lang") lang: String
     ): ForecastResponse
 
     companion object {

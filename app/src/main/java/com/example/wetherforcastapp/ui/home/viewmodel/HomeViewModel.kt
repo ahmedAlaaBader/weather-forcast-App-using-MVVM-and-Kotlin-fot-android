@@ -1,5 +1,7 @@
 package com.example.wetherforcastapp.ui.home.viewmodel
 
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.wetherforcastapp.model.data.IRepo
@@ -18,17 +20,19 @@ class HomeViewModel(private val repo: IRepo) : ViewModel() {
 
     private val _uiState = MutableStateFlow<UIState>(UIState.Loading)
     val uiState: StateFlow<UIState> = _uiState
+
+
 init {
     fetchCurrentWeatherLocal()
 }
     // Fetch weather from API and save to local database
-    fun fetchWeatherAndSaveToLocal(latitude: Double, longitude: Double) {
+    fun fetchWeatherAndSaveToLocal(latitude: Double, longitude: Double,lang:String) {
         viewModelScope.launch {
             _uiState.value = UIState.Loading
 
             // Use flow to handle weather data fetching and error handling
-            repo.getCurrentWeatherRemote(latitude, longitude)
-                .zip(repo.getForecastWeatherRemote(latitude, longitude)) { currentWeather, forecast ->
+            repo.getCurrentWeatherRemote(latitude, longitude,lang=lang)
+                .zip(repo.getForecastWeatherRemote(latitude, longitude,lang=lang)) { currentWeather, forecast ->
                     // Create a DataBaseEntity with fetched data
                     DataBaseEntity(
                         address = "current",

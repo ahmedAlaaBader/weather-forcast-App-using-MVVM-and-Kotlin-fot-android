@@ -1,5 +1,7 @@
 package com.example.wetherforcastapp.ui.favorite.view
 
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.wetherforcastapp.R
 import com.example.wetherforcastapp.databinding.FragmentMapsBinding
 import com.example.wetherforcastapp.model.data.RepoImpl
@@ -28,7 +31,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var binding: FragmentMapsBinding
     private lateinit var mMap: GoogleMap
-
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var lang :String
 
     private var latitude: Double? = null
     private var longitude: Double? = null
@@ -48,6 +52,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMapsBinding.inflate(inflater, container, false)
+        sharedPreferences = requireContext().getSharedPreferences("R3-pref", MODE_PRIVATE)
         return binding.root
     }
 
@@ -102,7 +107,22 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun setToFavWeather(address: String, latitude: Double, longitude: Double) {
-        favViewModel.fetchWeatherAndSaveToLocal(latitude, longitude,address)
-    }
+        lang= sharedPreferences.getString("LANG","en").toString()
+        val map =sharedPreferences.getString("map","g")
+        if (map == "m"){
+            val bundle = Bundle().apply {
+                putDouble("latitude", latitude)
+                putDouble("longitude", longitude)
+            }
+            findNavController().navigate(R.id.homeFragment,bundle)
+        }else{
+            favViewModel.fetchWeatherAndSaveToLocal(latitude, longitude,address ,lang=lang)
+        }
 
+    }
+    private fun savePreference(key: String, value: String) {
+        val editor = sharedPreferences.edit()
+        editor.putString(key, value)
+        editor.apply()
+    }
 }

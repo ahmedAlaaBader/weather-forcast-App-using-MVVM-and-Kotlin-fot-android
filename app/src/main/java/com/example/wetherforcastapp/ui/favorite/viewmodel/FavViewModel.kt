@@ -52,13 +52,13 @@ init {
     }
 
     // Fetch weather from API and save to local database
-    fun fetchWeatherAndSaveToLocal(latitude: Double, longitude: Double,address:String) {
+    fun fetchWeatherAndSaveToLocal(latitude: Double, longitude: Double,address:String,lang:String) {
         viewModelScope.launch {
             _uiState.value = UIState.Loading
 
             // Use flow to handle weather data fetching and error handling
-            repo.getCurrentWeatherRemote(latitude, longitude)
-                .zip(repo.getForecastWeatherRemote(latitude, longitude)) { currentWeather, forecast ->
+            repo.getCurrentWeatherRemote(latitude, longitude,lang=lang)
+                .zip(repo.getForecastWeatherRemote(latitude, longitude,lang=lang)) { currentWeather, forecast ->
                     // Create a DataBaseEntity with fetched data
                     DataBaseEntity(
                         address = address,
