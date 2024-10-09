@@ -2,12 +2,14 @@ package com.example.wetherforcastapp.model.data
 
 import com.example.wetherforcastapp.model.data.database.ILocalDataBase
 import com.example.wetherforcastapp.model.data.database.LocalDataBaseImp
-import com.example.wetherforcastapp.model.data.database.currentweather.intyty.DataBaseEntity
+import com.example.wetherforcastapp.model.data.database.intyty.DataBaseEntity
+import com.example.wetherforcastapp.model.data.database.intyty.EntityAlarm
 import com.example.wetherforcastapp.model.data.network.IRemoteDataSource
 import com.example.wetherforcastapp.model.data.network.IRemoteDataSourceImpl
 import com.example.wetherforcastapp.model.data.network.forcastresponse.ForecastResponse
 import com.example.wetherforcastapp.model.data.network.response.CurrentWeatherResponse
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class RepoImpl(
     private val remoteDataSource: IRemoteDataSource,
@@ -49,4 +51,20 @@ class RepoImpl(
     override suspend fun deleteWeatherByAddress(address: String) {
         localDataBase.deleteByAddress(address)
     }
+
+    override fun getAllAlarm() = flow {
+        localDataBase.getAllAlarm().collect { favList ->
+            emit(favList)
+        }
+    }
+
+    override suspend fun deleteByTime(time: String) = localDataBase.deleteByTime(time)
+
+    override fun getAlarmByTime(time: String): Flow<EntityAlarm> = flow {
+        localDataBase.getAlarmByTime(time).collect{
+            emit(it)
+        }
+    }
+
+    override suspend fun insertAlarm(entityAlarm: EntityAlarm) = localDataBase.insertAlarm(entityAlarm)
 }

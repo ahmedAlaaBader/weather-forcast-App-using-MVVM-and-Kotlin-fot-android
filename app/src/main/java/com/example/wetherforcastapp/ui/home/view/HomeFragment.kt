@@ -20,7 +20,7 @@ import com.example.wetherforcastapp.model.data.RepoImpl
 import com.example.wetherforcastapp.ui.home.viewmodel.HomeViewModel
 import com.example.wetherforcastapp.model.data.UIState
 import com.example.wetherforcastapp.model.data.database.LocalDataBaseImp
-import com.example.wetherforcastapp.model.data.database.currentweather.intyty.DataBaseEntity
+import com.example.wetherforcastapp.model.data.database.intyty.DataBaseEntity
 import com.example.wetherforcastapp.model.data.network.IRemoteDataSourceImpl
 import com.example.wetherforcastapp.ui.helperClasess.LocationPermissions
 import com.example.wetherforcastapp.ui.helperClasess.LocationResultListener
@@ -247,12 +247,10 @@ class HomeFragment : Fragment(),LocationResultListener {
        binding.progressBar.visibility = View.VISIBLE
         //Toast.makeText(requireContext(), "loading", Toast.LENGTH_LONG).show()
     }
-
     private fun showError(exception: Throwable) {
         // Handle error (show a Toast, Snackbar, or TextView with the error message)
         Toast.makeText(requireContext(), "Error: ${exception.localizedMessage}", Toast.LENGTH_LONG).show()
     }
-
     override fun onLocationReceived(latitude: Double, longitude: Double) {
         lang= sharedPreferences.getString("LANG","en").toString()
         viewModel.fetchWeatherAndSaveToLocal(latitude, longitude, lang)

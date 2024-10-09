@@ -1,4 +1,4 @@
-package com.example.wetherforcastapp.model.data.database.currentweather.intyty
+package com.example.wetherforcastapp.model.data.database.intyty
 
 
 import androidx.room.Entity

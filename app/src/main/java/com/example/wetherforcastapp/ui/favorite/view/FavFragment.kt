@@ -19,7 +19,7 @@ import com.example.wetherforcastapp.databinding.FragmentFavBinding
 import com.example.wetherforcastapp.model.data.RepoImpl
 import com.example.wetherforcastapp.model.data.UIState
 import com.example.wetherforcastapp.model.data.database.LocalDataBaseImp
-import com.example.wetherforcastapp.model.data.database.currentweather.intyty.DataBaseEntity
+import com.example.wetherforcastapp.model.data.database.intyty.DataBaseEntity
 import com.example.wetherforcastapp.model.data.network.IRemoteDataSourceImpl
 import com.example.wetherforcastapp.ui.favorite.viewmodel.FavViewModelFactory
 import kotlinx.coroutines.flow.collectLatest

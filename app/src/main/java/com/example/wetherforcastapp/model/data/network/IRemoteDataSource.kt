@@ -1,6 +1,6 @@
 package com.example.wetherforcastapp.model.data.network
 
-import com.example.wetherforcastapp.model.data.database.currentweather.intyty.DataBaseEntity
+import com.example.wetherforcastapp.model.data.database.intyty.DataBaseEntity
 import com.example.wetherforcastapp.model.data.network.forcastresponse.ForecastResponse
 import com.example.wetherforcastapp.model.data.network.response.CurrentWeatherResponse
 import kotlinx.coroutines.Deferred

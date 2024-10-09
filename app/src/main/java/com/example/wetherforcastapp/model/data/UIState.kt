@@ -1,6 +1,6 @@
 package com.example.wetherforcastapp.model.data
 
-import com.example.wetherforcastapp.model.data.database.currentweather.intyty.DataBaseEntity
+import com.example.wetherforcastapp.model.data.database.intyty.DataBaseEntity
 
 
 

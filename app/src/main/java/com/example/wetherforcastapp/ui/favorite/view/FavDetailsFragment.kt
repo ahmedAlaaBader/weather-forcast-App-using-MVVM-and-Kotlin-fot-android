@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 
 import com.example.wetherforcastapp.databinding.FragmentFavDetailsBinding
-import com.example.wetherforcastapp.model.data.database.currentweather.intyty.DataBaseEntity
+import com.example.wetherforcastapp.model.data.database.intyty.DataBaseEntity
 import com.example.wetherforcastapp.ui.home.view.DaysWeatherListAdapter
 import com.example.wetherforcastapp.ui.home.view.HourlyWeatherListAdapter
 

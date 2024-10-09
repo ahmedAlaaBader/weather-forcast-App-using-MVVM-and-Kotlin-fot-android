@@ -1,6 +1,7 @@
 package com.example.wetherforcastapp.model.data
 
-import com.example.wetherforcastapp.model.data.database.currentweather.intyty.DataBaseEntity
+import com.example.wetherforcastapp.model.data.database.intyty.DataBaseEntity
+import com.example.wetherforcastapp.model.data.database.intyty.EntityAlarm
 import com.example.wetherforcastapp.model.data.network.forcastresponse.ForecastResponse
 import com.example.wetherforcastapp.model.data.network.response.CurrentWeatherResponse
 import kotlinx.coroutines.flow.Flow
@@ -15,4 +16,8 @@ interface IRepo {
     fun getAllFavorites(): Flow<List<DataBaseEntity>>
     suspend fun upsertWeather(dataBaseEntity: DataBaseEntity)
     suspend fun deleteWeatherByAddress(address: String)
+    fun getAllAlarm(): Flow<List<EntityAlarm>>
+    suspend fun deleteByTime(time: String)
+    fun getAlarmByTime(time: String): Flow<EntityAlarm>
+    suspend fun insertAlarm(entityAlarm: EntityAlarm)
 }

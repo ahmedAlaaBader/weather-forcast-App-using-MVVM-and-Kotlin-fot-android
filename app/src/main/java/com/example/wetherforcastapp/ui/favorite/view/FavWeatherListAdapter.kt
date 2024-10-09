@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wetherforcastapp.databinding.FavItemBinding
 import com.example.wetherforcastapp.databinding.FragmentFavBinding
-import com.example.wetherforcastapp.model.data.database.currentweather.intyty.DataBaseEntity
+import com.example.wetherforcastapp.model.data.database.intyty.DataBaseEntity
 
 class FavWeatherListAdapter (
     var myListener: (DataBaseEntity) -> Unit,

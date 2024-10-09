@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/alarmFragment"
-        android:name="com.example.wetherforcastapp.ui.alarm.view.alarmFragment"
+        android:name="com.example.wetherforcastapp.ui.alarm.view.AlarmFragment"
         android:label="Alarms"
         tools:layout="@layout/fragment_alarm" />
     <fragment

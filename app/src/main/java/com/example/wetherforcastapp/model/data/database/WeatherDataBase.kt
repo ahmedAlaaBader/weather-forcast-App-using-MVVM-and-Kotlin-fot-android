@@ -5,15 +5,16 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import android.content.Context
 import androidx.room.TypeConverters
-import com.example.wetherforcastapp.model.data.database.currentweather.intyty.CurrentWeatherResponsesConverter
-import com.example.wetherforcastapp.model.data.database.currentweather.intyty.DataBaseEntity
-import com.example.wetherforcastapp.model.data.database.currentweather.intyty.ForecastResponseConverter
+import com.example.wetherforcastapp.model.data.database.intyty.CurrentWeatherResponsesConverter
+import com.example.wetherforcastapp.model.data.database.intyty.DataBaseEntity
+import com.example.wetherforcastapp.model.data.database.intyty.EntityAlarm
+import com.example.wetherforcastapp.model.data.database.intyty.ForecastResponseConverter
 
-@Database(entities = [DataBaseEntity::class], version = 1, exportSchema = false)
+@Database(entities = [DataBaseEntity::class,EntityAlarm::class], version = 2, exportSchema = false)
 @TypeConverters(CurrentWeatherResponsesConverter::class, ForecastResponseConverter::class)
 abstract class WeatherDatabase : RoomDatabase() {
     abstract fun iWeatherDao(): IWeatherDao
-
+    abstract fun iAlarmDao():IAlarmDao
     companion object {
         @Volatile
         private var instance: WeatherDatabase? = null
@@ -25,7 +26,7 @@ abstract class WeatherDatabase : RoomDatabase() {
                     WeatherDatabase::class.java,
                     "TWeather"
                 )
-                    .fallbackToDestructiveMigration() // Handles migration issues by wiping and rebuilding the database
+                    .fallbackToDestructiveMigration()
                     .build()
                 instance = tempInstance
                 tempInstance

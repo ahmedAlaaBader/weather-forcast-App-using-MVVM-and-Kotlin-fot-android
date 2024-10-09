@@ -1,7 +1,7 @@
 package com.example.wetherforcastapp.ui.favorite.view
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.wetherforcastapp.model.data.database.currentweather.intyty.DataBaseEntity
+import com.example.wetherforcastapp.model.data.database.intyty.DataBaseEntity
 import com.example.wetherforcastapp.model.data.database.forcastweather.ForecastItem
 
 class FavDifUtil: DiffUtil.ItemCallback<DataBaseEntity>() {
