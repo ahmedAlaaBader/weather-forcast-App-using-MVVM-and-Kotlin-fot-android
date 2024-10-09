@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/background_dark"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/accent_purple"
+            android:padding="8dp"
+            android:text="@string/time"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/setTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2:52 AM"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="16dp"
+            android:background="@color/accent_purple"
+            android:padding="8dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/alarmDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="26 Feb, 2021"
+        android:textColor="@android:color/white"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:background="@color/card_background_dark"
+        android:padding="8dp" />
+
+    <RadioGroup
+        android:id="@+id/alarmNot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp">
+
+        <RadioButton
+            android:id="@+id/radioAlarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/alarm"
+            android:textColor="@android:color/white" />
+
+        <RadioButton
+            android:id="@+id/radioNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/notification"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="16dp" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/accent_purple"
+        android:text="@string/save"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>
