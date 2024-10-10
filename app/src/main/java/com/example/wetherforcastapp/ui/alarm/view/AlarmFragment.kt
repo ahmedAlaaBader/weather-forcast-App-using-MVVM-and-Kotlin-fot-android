@@ -147,6 +147,7 @@ class AlarmFragment : Fragment() {
     @SuppressLint("DefaultLocale")
     private fun setAlarm(selectedDate: String, fromTime: String, alarmId: Int) {
         val alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        // Check if exact alarms can be scheduled
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !alarmManager.canScheduleExactAlarms()) {
             showExactAlarmPermissionDialog()
             return
@@ -156,34 +157,55 @@ class AlarmFragment : Fragment() {
         val currentDate = Calendar.getInstance()
         val dateParts = selectedDate.split("/")
         val selectedDay = dateParts[0].toInt()
-        val selectedMonth = dateParts[1].toInt() - 1
+        val selectedMonth = dateParts[1].toInt() - 1 // Months are zero-indexed in Calendar
         val selectedYear = dateParts[2].toInt()
 
+        // Set the calendar to the selected date
         calendar.set(selectedYear, selectedMonth, selectedDay)
 
+        // Split time string
         val fromTimeParts = fromTime.split(":")
         val fromHour = fromTimeParts[0].toInt()
         val fromMinute = fromTimeParts[1].substring(0, 2).toInt()
         val fromAmPm = fromTimeParts[1].substring(3)
-        val hourAdjusted = if (fromAmPm == "PM" && fromHour != 12) fromHour + 12 else fromHour
 
+        // Adjust hour for 12-hour format to 24-hour format
+        val hourAdjusted = when {
+            fromAmPm == "AM" && fromHour == 12 -> 0 // Midnight case
+            fromAmPm == "PM" && fromHour != 12 -> fromHour + 12 // Convert PM hour to 24-hour format
+            else -> fromHour // No adjustment needed
+        }
+
+        // Set the hour, minute, and seconds in the calendar
         calendar.set(Calendar.HOUR_OF_DAY, hourAdjusted)
         calendar.set(Calendar.MINUTE, fromMinute)
         calendar.set(Calendar.SECOND, 0)
 
+        // If the set time is in the past, add a day
         if (calendar.timeInMillis < currentDate.timeInMillis) {
             calendar.add(Calendar.DAY_OF_MONTH, 1)
         }
-        val updatedDate = String.format("%02d/%02d/%04d", calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR))
 
+        // Format the updated date for storage or display
+        val updatedDate = String.format(
+            "%02d/%02d/%04d",
+            calendar.get(Calendar.DAY_OF_MONTH),
+            calendar.get(Calendar.MONTH) + 1,
+            calendar.get(Calendar.YEAR)
+        )
+
+        // Create the intent and pending intent for the alarm
         val intent = Intent(requireContext(), AlarmReceiver::class.java)
         val pendingIntent = PendingIntent.getBroadcast(
-            requireContext(), alarmId, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            requireContext(),
+            alarmId,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
+
 
         val entityAlarm = EntityAlarm(alarmId, updatedDate, fromTime, alarm)
         viewModel.insertalarm(entityAlarm)
-
         try {
             alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
             Toast.makeText(requireContext(), "Alarm set for $fromTime on $updatedDate", Toast.LENGTH_SHORT).show()
@@ -192,6 +214,7 @@ class AlarmFragment : Fragment() {
             showExactAlarmPermissionDialog()
         }
     }
+
     private fun showConfirmationDialog(selectedDate: String, selectedTime: String) {
         val dialogView = layoutInflater.inflate(R.layout.dialog_alarm, null)
         val dateTextView = dialogView.findViewById<TextView>(R.id.alarmDate)

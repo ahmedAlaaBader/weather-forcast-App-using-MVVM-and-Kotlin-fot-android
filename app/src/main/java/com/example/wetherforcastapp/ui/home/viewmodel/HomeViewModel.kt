@@ -23,6 +23,7 @@ class HomeViewModel(private val repo: IRepo) : ViewModel() {
 
 
 init {
+    //if this not found the app will show nothing to user
     fetchCurrentWeatherLocal()
 }
     // Fetch weather from API and save to local database
@@ -76,4 +77,5 @@ init {
                 }
         }
     }
+
 }

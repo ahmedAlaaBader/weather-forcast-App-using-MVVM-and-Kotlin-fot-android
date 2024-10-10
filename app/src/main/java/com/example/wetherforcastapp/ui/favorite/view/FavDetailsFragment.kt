@@ -62,7 +62,9 @@ class FavDetailsFragment : Fragment() {
     private fun updateCurrentWeatherUI(dataBaseEntity: DataBaseEntity) {
 
         binding.weatherCondition.text = dataBaseEntity.currentWeatherResponses.weather[0].description
+        if (dataBaseEntity.currentWeatherResponses.name != ""){
         binding.cityName.text = dataBaseEntity.currentWeatherResponses.name
+        }else {binding.cityName.text = dataBaseEntity.address}
 
         val tempCelsius = dataBaseEntity.currentWeatherResponses.main.temp
         val convertedTemp = convertTemp(tempCelsius.toString())

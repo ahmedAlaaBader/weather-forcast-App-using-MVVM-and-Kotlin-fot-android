@@ -51,6 +51,7 @@ class HomeFragment : Fragment(),LocationResultListener {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         sharedPreferences = requireContext().getSharedPreferences("R3-pref", MODE_PRIVATE)
         locationPermissions = LocationPermissions(this,this)
+      //  locationPermissions.checkLocationPermissions()
         setupRecyclerViews()
         return binding.root
     }
@@ -71,7 +72,7 @@ class HomeFragment : Fragment(),LocationResultListener {
 
         // Fetch weather data (current and forecast)
        // fetchWeatherData(30.2681475, 30.60733385) // Example coordinates
-
+        locationPermissions.checkLocationPermissions()
         observeUIState()
     }
 
@@ -120,7 +121,9 @@ class HomeFragment : Fragment(),LocationResultListener {
     private fun updateCurrentWeatherUI(dataBaseEntity: DataBaseEntity) {
         binding.progressBar.visibility = View.GONE
         binding.weatherCondition.text = dataBaseEntity.currentWeatherResponses.weather[0].description
-        binding.cityName.text = dataBaseEntity.currentWeatherResponses.name
+        if (dataBaseEntity.currentWeatherResponses.name != ""){
+            binding.cityName.text = dataBaseEntity.currentWeatherResponses.name
+        }else {binding.cityName.text = dataBaseEntity.address}
 
         val tempCelsius = dataBaseEntity.currentWeatherResponses.main.temp
         val convertedTemp = convertTemp(tempCelsius.toString())

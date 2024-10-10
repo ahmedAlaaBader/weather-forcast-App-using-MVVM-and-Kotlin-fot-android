@@ -2,6 +2,7 @@ package com.example.wetherforcastapp.model.data
 
 import com.example.wetherforcastapp.model.data.database.FakeLocalDataBaseImp
 import com.example.wetherforcastapp.model.data.database.intyty.DataBaseEntity
+import com.example.wetherforcastapp.model.data.database.intyty.EntityAlarm
 import com.example.wetherforcastapp.model.data.network.FakeIRemoteDataSourceImpl
 import com.example.wetherforcastapp.model.data.network.forcastresponse.ForecastResponse
 import com.example.wetherforcastapp.model.data.network.response.CurrentWeatherResponse
@@ -45,6 +46,22 @@ class FakeRepoImpl(val fakeIRemoteDataSourceImpl: FakeIRemoteDataSourceImpl,val 
     }
 
     override suspend fun deleteWeatherByAddress(address: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getAllAlarm(): Flow<List<EntityAlarm>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun deleteByTime(time: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getAlarmByTime(time: String): Flow<EntityAlarm> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun insertAlarm(entityAlarm: EntityAlarm) {
         TODO("Not yet implemented")
     }
 

@@ -50,12 +50,7 @@ class AlarmService : Service() {
     private val serviceJob = Job()
     private val serviceScope = CoroutineScope(Dispatchers.Main + serviceJob)
     private lateinit var alarmDes: String
-    private var soundUri: Uri? = null
-    private lateinit var ringtone: Ringtone
-
-    override fun onBind(p0: Intent?): IBinder? {
-        return null
-    }
+    private var sound by Delegates.notNull<Boolean>()
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         if (intent?.action == "CANCEL_ALARM") {
@@ -63,31 +58,19 @@ class AlarmService : Service() {
             cancelAlarm()
             return START_NOT_STICKY
         }
-
-        repo = RepoImpl.getInstance(
+       repo= RepoImpl.getInstance(
             IRemoteDataSourceImpl.getInstance(),
             LocalDataBaseImp.getInstance(applicationContext)
         )
 
+
         serviceScope.launch {
             repo.getAlarmByTime(getCurrentTime()).collect { alarm ->
-
-                soundUri = if (!alarm.alarm) {
-                    RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-                } else {
-                    null
-                }
+                sound = alarm.alarm
 
                 repo.getCurrentWeatherLocal().collect {
                     alarmDes = it.currentWeatherResponses.weather[0].description
                     val notification = createNotification("Alarm", alarmDes)
-
-
-                    soundUri?.let { uri ->
-                        ringtone = RingtoneManager.getRingtone(applicationContext, uri)
-                        ringtone.play()
-                    }
-
                     startForeground(1, notification)
                     repo.deleteByTime(getCurrentTime())
                 }
@@ -99,13 +82,17 @@ class AlarmService : Service() {
         return START_STICKY
     }
 
-    private fun stopSelfDelayed() {
-        val delayMillis = 60 * 1000L // Delay for 1 minute
-        Handler().postDelayed({
-            stopForeground(true)
-            stopSelf()
-            ringtone.stop() // Stop the ringtone when service is stopped
-        }, delayMillis)
+    private fun createNotificationChannel() {
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val channelId = "alarm_channel"
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(channelId, "Alarm Channel", NotificationManager.IMPORTANCE_HIGH).apply {
+                description = "Channel for alarm notifications"
+                setSound(null, null)
+            }
+            notificationManager.createNotificationChannel(channel)
+        }
     }
 
     private fun createNotification(title: String, message: String): Notification {
@@ -130,6 +117,7 @@ class AlarmService : Service() {
             .setSmallIcon(android.R.drawable.ic_lock_idle_alarm)
             .setContentIntent(contentPendingIntent)
             .setDeleteIntent(cancelPendingIntent)
+            .setSilent(sound)
             .setOngoing(true)
             .setAutoCancel(false)
             .addAction(
@@ -140,26 +128,25 @@ class AlarmService : Service() {
             .build()
     }
 
-    private fun createNotificationChannel() {
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        val channelId = "alarm_channel"
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(channelId, "Alarm Channel", NotificationManager.IMPORTANCE_HIGH).apply {
-                description = "Channel for alarm notifications"
-                setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM), null) // Set alarm sound
-            }
-            notificationManager.createNotificationChannel(channel)
-        }
+    private fun stopSelfDelayed() {
+        val delayMillis = 60 * 1000L // Delay for 1 minute
+        Handler().postDelayed({
+            stopForeground(true)
+            stopSelf()
+        }, delayMillis)
+    }
+
+    override fun onBind(intent: Intent?): IBinder? {
+        return null
     }
 
     private fun cancelAlarm() {
+
         stopForeground(true)
         stopSelf()
-        if (::ringtone.isInitialized) {
-            ringtone.stop() // Stop the ringtone if it is playing
-        }
     }
+
 
     private fun getCurrentTime(): String {
         val calendar = Calendar.getInstance()
@@ -171,4 +158,3 @@ class AlarmService : Service() {
         return String.format("%02d:%02d %s", formattedHour, minute, amPm)
     }
 }
-

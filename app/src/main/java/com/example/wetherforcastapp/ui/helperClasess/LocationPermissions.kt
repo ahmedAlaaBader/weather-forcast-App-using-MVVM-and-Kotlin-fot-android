@@ -24,9 +24,9 @@ class LocationPermissions(
     private val locationCallback: LocationResultListener
 ) {
 
-    init {
-        checkLocationPermissions()
-    }
+//    init {
+//        checkLocationPermissions()
+//    }
 
      fun checkLocationPermissions() {
 
@@ -112,9 +112,21 @@ class LocationPermissions(
         }
     }
 
+//    private fun hasLocationPermissions(): Boolean {
+//        return ActivityCompat.checkSelfPermission(fragment.requireActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
+//                ActivityCompat.checkSelfPermission(fragment.requireActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+//    }
     private fun hasLocationPermissions(): Boolean {
-        return ActivityCompat.checkSelfPermission(fragment.requireActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
-                ActivityCompat.checkSelfPermission(fragment.requireActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+        val permissions = arrayOf(
+            android.Manifest.permission.ACCESS_FINE_LOCATION,
+            android.Manifest.permission.ACCESS_COARSE_LOCATION
+        )
+
+
+        return permissions.all {
+            ActivityCompat.checkSelfPermission(fragment.requireActivity(), it) == PackageManager.PERMISSION_GRANTED
+        }
     }
+
 }
 
